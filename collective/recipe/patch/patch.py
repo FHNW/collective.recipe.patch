@@ -46,7 +46,7 @@ def read_patch(filename):
 
   fp = open(filename, "rb")
   for lineno, line in enumerate(fp):
-
+    line = line.decode() 
     # analyze state
     if header and line.startswith("--- "):
       header = False
@@ -272,6 +272,7 @@ def patch_hunks(srcname, tgtname, hunks):
     # skip to line just before hunk starts
     while srclineno < h["startsrc"]:
       line = src.readline()
+      line = line.decode()
       # 'U' mode works only with text files
       if line.endswith("\r\n"):
         lineends["\r\n"] += 1
